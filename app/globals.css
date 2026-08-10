@@ -6,6 +6,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
+  overflow: hidden;
 }
 
 button,
@@ -920,8 +921,14 @@ button {
 }
 
 .horizontal-portfolio {
-  height: 100dvh;
+  --page-scale: 0.8;
+  --stage-width: calc(100vw / var(--page-scale));
+  --stage-height: calc(100dvh / var(--page-scale));
+  width: var(--stage-width);
+  height: var(--stage-height);
   overflow: hidden;
+  transform: scale(var(--page-scale));
+  transform-origin: top left;
 }
 
 .reference-map-layer {
@@ -1036,7 +1043,7 @@ button {
 .slide-stage {
   position: relative;
   z-index: 3;
-  height: 100dvh;
+  height: var(--stage-height);
   overflow: hidden;
 }
 
@@ -1044,16 +1051,16 @@ button {
   display: flex;
   width: max-content;
   height: 100%;
-  transform: translate3d(calc(var(--active-page) * -100vw), 0, 0);
+  transform: translate3d(calc(var(--active-page) * var(--stage-width) * -1), 0, 0);
   transition: transform 680ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .slide-page {
   position: relative;
   display: grid;
-  flex: 0 0 100vw;
-  width: 100vw;
-  min-height: 100dvh;
+  flex: 0 0 var(--stage-width);
+  width: var(--stage-width);
+  min-height: var(--stage-height);
   padding: 96px clamp(24px, 5vw, 72px) 202px;
 }
 
@@ -2311,14 +2318,24 @@ button {
 }
 
 @media (max-width: 900px) {
+  html,
+  body {
+    overflow: auto;
+  }
+
   .reference-map-layer {
     display: none;
   }
 
   .horizontal-portfolio {
+    --page-scale: 1;
+    --stage-width: 100vw;
+    --stage-height: auto;
+    width: 100%;
     height: auto;
     min-height: 100dvh;
     overflow: visible;
+    transform: none;
   }
 
   .slide-topbar {

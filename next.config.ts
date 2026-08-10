@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+const githubPagesPath = "/zoe-s-portfolio";
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: isGithubPages ? "export" : undefined,
+  basePath: isGithubPages ? githubPagesPath : undefined,
+  assetPrefix: isGithubPages ? `${githubPagesPath}/` : undefined,
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
 };
 
 export default nextConfig;

@@ -155,6 +155,9 @@ const photoCards = [
   },
 ];
 
+const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const asset = (path: string) => `${assetBase}${path}`;
+
 const homeAdvantages = [
   {
     title: "海外增长策略",
@@ -280,7 +283,14 @@ export default function PortfolioRoadApp() {
                       aria-label={`切换照片：${card.title}`}
                     >
                       <span>{card.index}</span>
-                      {card.image ? <img src={card.image} alt={card.title} /> : <i aria-hidden="true" />}
+                      {card.image ? (
+                        <img
+                          src={asset(card.image)}
+                          alt={card.title}
+                          loading={stackIndex === 0 ? "eager" : "lazy"}
+                          decoding="async"
+                        />
+                      ) : <i aria-hidden="true" />}
                       <strong>{card.title}</strong>
                       <em>{card.caption}</em>
                     </button>
@@ -375,10 +385,12 @@ export default function PortfolioRoadApp() {
                     {slide.modules.map((module) => (
                       <article className="offercat-module-card" key={module.title}>
                         <img
-                          src={module.image}
+                          src={asset(module.image)}
                           alt={`${module.title} 页面截图`}
                           width={640}
                           height={360}
+                          loading="lazy"
+                          decoding="async"
                           sizes="(max-width: 900px) 100vw, 24vw"
                         />
                         <div>
@@ -394,10 +406,12 @@ export default function PortfolioRoadApp() {
                     {slide.gallery.map((item) => (
                       <figure key={item.title}>
                         <img
-                          src={item.image}
+                          src={asset(item.image)}
                           alt={item.title}
                           width={640}
                           height={520}
+                          loading="lazy"
+                          decoding="async"
                           sizes="(max-width: 900px) 100vw, 28vw"
                         />
                         <figcaption>{item.title}</figcaption>
@@ -406,10 +420,12 @@ export default function PortfolioRoadApp() {
                   </div>
                 ) : slide.image ? (
                   <img
-                    src={slide.image}
+                    src={asset(slide.image)}
                     alt={`${slide.title} 项目截图`}
                     width={980}
                     height={560}
+                    loading="lazy"
+                    decoding="async"
                     sizes="(max-width: 900px) 100vw, 48vw"
                   />
                 ) : null}
@@ -446,10 +462,12 @@ export default function PortfolioRoadApp() {
         </div>
         <div className="road-house" aria-hidden="true">
           <img
-            src="/assets/portfolio/wood_house_web.png"
+            src={asset("/assets/portfolio/wood_house_web.png")}
             alt=""
             width={372}
             height={399}
+            loading="eager"
+            decoding="async"
           />
         </div>
         <div className="road-line" aria-hidden="true" />

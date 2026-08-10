@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const assetBase = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "Zoe's Portfolio | 曾依 Zoe Zeng",
   description:
@@ -12,8 +14,8 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/assets/portfolio/wood_house_web.png",
-    shortcut: "/assets/portfolio/wood_house_web.png",
+    icon: `${assetBase}/assets/portfolio/wood_house_web.png`,
+    shortcut: `${assetBase}/assets/portfolio/wood_house_web.png`,
   },
 };
 
