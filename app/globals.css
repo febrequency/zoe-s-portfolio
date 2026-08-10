@@ -2299,6 +2299,40 @@ button {
   }
 }
 
+@media print {
+  @page {
+    size: 16in 9in;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 16in;
+    height: 9in;
+    overflow: hidden;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .portfolio-page {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .horizontal-portfolio {
+    --page-scale: 0.8;
+    --stage-width: 20in;
+    --stage-height: 11.25in;
+  }
+
+  .slide-topbar,
+  .slide-track,
+  .slide-car {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 @media (min-height: 780px) and (min-width: 901px) {
   .portfolio-page {
     --home-content-shift: clamp(58px, 8vh, 92px);

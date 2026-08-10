@@ -190,7 +190,7 @@ const educationItems = [
 
 export default function PortfolioRoadApp() {
   const slides = useMemo(() => ["home", ...projectSlides.map((slide) => slide.id)], []);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(getInitialSlideIndex);
   const [activePhotoIndex, setActivePhotoIndex] = useState(0);
   const lastWheelAt = useRef(0);
 
@@ -507,4 +507,11 @@ export default function PortfolioRoadApp() {
 
 function progressForStop(index: number, total: number) {
   return total <= 1 ? 0 : index / (total - 1);
+}
+
+function getInitialSlideIndex() {
+  if (typeof window === "undefined") return 0;
+  const requestedSlide = Number(new URLSearchParams(window.location.search).get("slide"));
+  if (!Number.isFinite(requestedSlide)) return 0;
+  return Math.max(0, Math.min(projectSlides.length, requestedSlide));
 }
