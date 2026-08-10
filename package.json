@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:edgeone": "next build",
+    "build:edgeone": "EDGEONE=true next build",
     "build:pages": "GITHUB_PAGES=true NEXT_PUBLIC_BASE_PATH=/zoe-s-portfolio next build",
     "start": "next start",
     "lint": "eslint . --ignore-pattern .next"
